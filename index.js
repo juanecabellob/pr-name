@@ -97,7 +97,7 @@ async function postComment(comment) {
   const postCommentResponse = await octokit.issues.createComment({
     owner,
     repo,
-    issue_number: issueNumber,
+    issue_number,
     body: comment,
   })
   core.info(`Posting comment (${name}) - ` + postCommentResponse.status);
