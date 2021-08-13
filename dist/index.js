@@ -14620,13 +14620,13 @@ async function run() {
     const { ignore_on_labels, pr_name_check } = config;
 
     for (const labelName of labelNames) {
-      if (ignoreOnLabels.includes(labelName)) {
+      if (ignore_on_labels.includes(labelName)) {
         core.info("Ignoring Title Check for label - " + labels[i].name);
         return;
       }
     }
 
-    const checkResult = await runChecks(prNameCheck, title);
+    const checkResult = await runChecks(pr_name_check, title);
 
     if (checkResult) {
       core.info("Check passed");
