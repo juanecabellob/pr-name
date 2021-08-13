@@ -1,0 +1,29 @@
+name: 'PR name check and run'
+description: 'Performs an action if the PR name check fails'
+inputs:
+  action_type:
+    description: "One of: comment, label or both"
+    required: true
+    default: comment
+  comment: 
+    description: "Template to use for the comment"
+    default: "Your PR name does not conform with our standards. Please read in the Contributing Guidelines about this."
+  label: 
+    description: "Label title to use in case the PR name does not conform with the standard"
+    default: "PR title needs formatting"
+  ignore_on_labels:
+    description: "Labels that should dictate whether the action should not run"
+    default: []
+  pr_name_check:
+    description: "Checks to be performed"
+    default:
+      prefixes: []
+  skip_ci: 
+    description: "Skips failing CI check"
+    default: false
+  GITHUB_TOKEN:
+    required: true
+on: [pull_request]
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
