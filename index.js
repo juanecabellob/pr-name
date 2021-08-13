@@ -24,7 +24,7 @@ async function run() {
     const config = await getConfig(configPath);
     const { ignore_on_labels, pr_name_check } = config;
 
-    for (const labelName of labelNames.length) {
+    for (const labelName of labelNames) {
       if (ignoreOnLabels.includes(labelName)) {
         core.info("Ignoring Title Check for label - " + labels[i].name);
         return;
