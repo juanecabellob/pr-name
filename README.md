@@ -22,3 +22,4 @@ pr_name_check:
     - "enhancement:"
 ignore_on_labels:
   - "do-not-check"
+```

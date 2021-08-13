@@ -21,6 +21,9 @@ inputs:
   skip_ci: 
     description: "Skips failing CI check"
     default: false
+  configuration-path:
+    description: "config file path"
+    default: ".github/pr-name-check-and-run-config.yaml"
   GITHUB_TOKEN:
     required: true
 on: [pull_request]
