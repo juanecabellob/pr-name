@@ -31,7 +31,7 @@ async function run() {
       }
     }
 
-    const checkResult = await runChecks(pr_name_check, title);
+    const checkResult = runChecks(pr_name_check, title);
 
     if (checkResult) {
       core.info("Check passed");
@@ -60,11 +60,11 @@ async function run() {
   }
 }
 
-async function runChecks(checks, prTitle) {
+function runChecks(checks, prTitle) {
   const { prefixes } = checks;
 
   const result = prefixes.some(prefix => {
-    const regex = new RegExp(`$${prefix}`, "i");
+    const regex = new RegExp(`^${prefix}`, "i");
     return regex.test(prTitle);
   });
 
