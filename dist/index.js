@@ -12933,8 +12933,6 @@ const configPath = core.getInput("configuration-path");
 const actionType = core.getInput('action_type');
 const label = core.getInput('label');
 const comment = core.getInput('comment');
-const ignoreOnLabels = core.getInput('ignore_on_labels');
-const prNameCheck = core.getInput('pr_name_check');
 const skipCi = core.getInput('skip_ci');
 
 const octokit = new Octokit();
@@ -12947,8 +12945,8 @@ async function run() {
 
     const labelNames = labels.map(i => i.name);
 
-    // const config = await getConfig(configPath);
-    // const { action_type, comment, label, ignore_on_labels, pr_name_check } = config;
+    const config = await getConfig(configPath);
+    const { ignore_on_labels, pr_name_check } = config;
 
     for (const labelName of labelNames.length) {
       if (ignoreOnLabels.includes(labelName)) {
@@ -13029,17 +13027,17 @@ async function postComment(comment) {
   core.info(`Posting comment (${name}) - ` + postCommentResponse.status);
 }
 
-// async function getConfig(repoPath) {
-//   const response = await octokit.repos.getContent({
-//     owner,
-//     repo,
-//     path: repoPath,
-//     ref: github.context.sha,
-//   });
+async function getConfig(repoPath) {
+  const response = await octokit.repos.getContent({
+    owner,
+    repo,
+    path: repoPath,
+    ref: github.context.sha,
+  });
 
-//   const yamlString = Buffer.from(response.data.content, response.data.encoding).toString();
-//   return yaml.parse(yamlString);
-// }
+  const yamlString = Buffer.from(response.data.content, response.data.encoding).toString();
+  return yaml.parse(yamlString);
+}
 
 run();
 
