@@ -14617,7 +14617,7 @@ async function run() {
     const labelNames = labels.map(i => i.name);
 
     const config = await getConfig(configPath);
-    const { ignore_on_labels, pr_name_check } = config;
+    const { ignore_on_labels = [], pr_name_check = { prefixes: [] } } = config;
 
     for (const labelName of labelNames) {
       if (ignore_on_labels.includes(labelName)) {
