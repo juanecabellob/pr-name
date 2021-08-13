@@ -11,13 +11,6 @@ inputs:
   label: 
     description: "Label title to use in case the PR name does not conform with the standard"
     default: "PR title needs formatting"
-  ignore_on_labels:
-    description: "Labels that should dictate whether the action should not run"
-    default: []
-  pr_name_check:
-    description: "Checks to be performed"
-    default:
-      prefixes: []
   skip_ci: 
     description: "Skips failing CI check"
     default: false
