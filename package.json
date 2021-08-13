@@ -1,6 +1,6 @@
 {
   "name": "pr-name",
-  "version": "1.0.0",
+  "version": "1.1.9",
   "description": "Performs an action if the PR name does not conform with the standard",
   "main": "index.js",
   "scripts": {
@@ -11,7 +11,7 @@
     "url": "git+https://github.com/juanecabellob/pr-name.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Juan Cabello <hi@juanecabellob.com> (https://github.com/juanecabellob)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/juanecabellob/pr-name/issues"

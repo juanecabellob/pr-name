@@ -10,7 +10,7 @@ inputs:
     default: "Your PR name does not conform with our standards. Please read in the Contributing Guidelines about this."
   label: 
     description: "Label title to use in case the PR name does not conform with the standard"
-    default: "PR title needs formatting"
+    default: "PR-title-needs-formatting"
   skip_ci: 
     description: "Skips failing CI check"
     default: false
