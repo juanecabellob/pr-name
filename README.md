@@ -1,10 +1,9 @@
 # pr-name
 
-Performs an action if a PR name check fails.
-
-The action so far is limited to either posting a comment or adding a label.
+Github action to either post a comment or add a label if a PR name check fails.
 
 The current checks are limited to prefixes in the PR title.
+
 # Usage 
 
 ```yaml
