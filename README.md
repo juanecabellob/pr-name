@@ -38,10 +38,10 @@ jobs:
 | Variable or Argument    | Location | Description                                                                                                                 | Required | Default |
 |--------------------------|------------------|----------------|-------------|
 | action_type | with | Determines what kind of action(s) should run. One of: comment, label or both | yes | comment |
-| comment | with | Message to post as a comment | yes | `Your PR name does not conform with our standards. Please read in the Contributing Guidelines about this.` |
-| label | with | Label title to use in case the PR name does not conform with the standard | yes | `PR title needs formatting` |
+| comment | with | Message to post as a comment | no | `Your PR name does not conform with our standards. Please read in the Contributing Guidelines about this.` |
+| label | with | Label title to use in case the PR name does not conform with the standard | no | `PR title needs formatting` |
 | skip_ci | with | Skips failing CI check in case something goes wrong | no | `false` |
-| configuration-path | with | Specifies where to find the configuration file | yes | `.github/pr-name-check-and-run-config.yaml` |
+| configuration-path | with | Specifies where to find the configuration file | no | `.github/pr-name-check-and-run-config.yaml` |
 | pr_name_check | config file | Contains the checks to be run | yes | `prefixes: []` |
 | ignore_on_labels | config file | Determines the labels that mark whether a PR should be ignored | no | `[]` |
 # Config file example 
