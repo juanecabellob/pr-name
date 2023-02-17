@@ -14647,9 +14647,9 @@ async function run() {
     }
     
     const error = new Error("PR title does not conform with guidelines");
-    
+    core.debug("skipCI", skipCi)
     if (!skipCi) {
-      core.setFailed(error);
+      throw error;
     } else {
       core.info(`Action for ${actionType} performed successfully`);
       core.error(error);
