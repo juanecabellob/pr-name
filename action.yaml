@@ -13,7 +13,7 @@ inputs:
     default: "PR-title-needs-formatting"
   skip_ci: 
     description: "Skips failing CI check"
-    default: false
+    default: "false"
   configuration-path:
     description: "config file path"
     default: ".github/pr-name-check-and-run-config.yaml"

@@ -9,7 +9,7 @@ const configPath = core.getInput("configuration-path");
 const actionType = core.getInput('action_type');
 const label = core.getInput('label');
 const comment = core.getInput('comment');
-const skipCi = core.getInput('skip_ci');
+const skipCi = core.getInput('skip_ci') == "true";
 
 const octokit = new Octokit();
 
