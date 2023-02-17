@@ -4,7 +4,8 @@
   "description": "Performs an action if the PR name does not conform with the standard",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "yarn ncc build index.js -o dist"
   },
   "repository": {
     "type": "git",

@@ -14645,6 +14645,14 @@ async function run() {
       await postComment(comment);
       await addLabel(label);
     }
+    
+    const error = new Error("PR title does not conform with guidelines");
+    
+    if (!skipCi) {
+      core.setFailed(error);
+    } else {
+      core.error(error);
+    }
     core.info(`Action for ${actionType} performed successfully`);
   } catch (error) {
     if (!skipCi) {
@@ -14695,7 +14703,7 @@ async function postComment(comment) {
     issue_number,
     body: comment,
   })
-  core.info(`Posting comment (${name}) - ` + postCommentResponse.status);
+  core.info(`Posting comment (${comment}) - ` + postCommentResponse.status);
 }
 
 async function getConfig(repoPath) {
