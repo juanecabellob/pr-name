@@ -108,7 +108,7 @@ async function postComment(comment) {
     issue_number,
     body: comment,
   })
-  core.info(`Posting comment (${name}) - ` + postCommentResponse.status);
+  core.info(`Posting comment (${comment}) - ` + postCommentResponse.status);
 }
 
 async function getConfig(repoPath) {
