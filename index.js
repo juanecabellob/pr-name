@@ -15,48 +15,56 @@ const octokit = new Octokit();
 
 // most @actions toolkit packages have async methods
 async function run() {
-  const title = github.context.payload.pull_request.title;
-  const labels = github.context.payload.pull_request.labels;
+  try {
+    const title = github.context.payload.pull_request.title;
+    const labels = github.context.payload.pull_request.labels;
 
-  const labelNames = labels.map(i => i.name);
+    const labelNames = labels.map(i => i.name);
 
-  const config = await getConfig(configPath);
-  const { ignore_on_labels = [], pr_name_check = { prefixes: [] } } = config;
+    const config = await getConfig(configPath);
+    const { ignore_on_labels = [], pr_name_check = { prefixes: [] } } = config;
 
-  for (const labelName of labelNames) {
-    if (ignore_on_labels.includes(labelName)) {
-      core.info("Ignoring Title Check for label - " + labels[i].name);
+    for (const labelName of labelNames) {
+      if (ignore_on_labels.includes(labelName)) {
+        core.info("Ignoring Title Check for label - " + labels[i].name);
+        return;
+      }
+    }
+
+    const checkResult = runChecks(pr_name_check, title);
+
+    if (checkResult) {
+      core.info("Check passed");
+      if (action_type === "label" || action_type === "both") {
+        await removeLabel(label);
+      }
+
       return;
     }
-  }
 
-  const checkResult = runChecks(pr_name_check, title);
-
-  if (checkResult) {
-    core.info("Check passed");
-    if (action_type === "label" || action_type === "both") {
-      await removeLabel(label);
+    if (actionType === "comment") {
+      await postComment(comment);
+    } else if (action_type === "label") {
+      await addLabel(label);
+    } else if (action_type === "both") {
+      await postComment(comment);
+      await addLabel(label);
     }
-
-    return;
-  }
-
-  if (actionType === "comment") {
-    await postComment(comment);
-  } else if (action_type === "label") {
-    await addLabel(label);
-  } else if (action_type === "both") {
-    await postComment(comment);
-    await addLabel(label);
-  }
-  
-  const error = new Error("PR title does not conform with guidelines");
-  core.debug("skipCI", skipCi)
-  if (!skipCi) {
-    throw error;
-  } else {
-    core.info(`Action for ${actionType} performed successfully`);
-    core.error(error);
+    
+    const error = new Error("PR title does not conform with guidelines");
+    
+    if (!skipCi) {
+      core.setFailed(error);
+    } else {
+      core.info(`Action for ${actionType} performed successfully`);
+      core.error(error);
+    }
+  } catch (error) {
+    if (!skipCi) {
+      core.setFailed(error);
+    } else {
+      core.error(error);
+    }
   }
 }
 
@@ -115,11 +123,4 @@ async function getConfig(repoPath) {
   return yaml.parse(yamlString);
 }
 
-run()
-  .catch(e => {
-    if (!skipCi) {
-      core.setFailed(error);
-    } else {
-      core.error(error);
-    }
-  });
+run();
