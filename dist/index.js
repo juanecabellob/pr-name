@@ -14651,9 +14651,9 @@ async function run() {
     if (!skipCi) {
       core.setFailed(error);
     } else {
+      core.info(`Action for ${actionType} performed successfully`);
       core.error(error);
     }
-    core.info(`Action for ${actionType} performed successfully`);
   } catch (error) {
     if (!skipCi) {
       core.setFailed(error);
