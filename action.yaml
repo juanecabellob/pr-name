@@ -4,7 +4,7 @@ inputs:
   action_type:
     description: "One of: comment, label or both"
     required: true
-    default: comment
+    default: "comment"
   comment: 
     description: "Template to use for the comment"
     default: "Your PR name does not conform with our standards. Please read in the Contributing Guidelines about this."
@@ -19,7 +19,6 @@ inputs:
     default: ".github/pr-name-check-and-run-config.yaml"
   GITHUB_TOKEN:
     required: true
-on: [pull_request]
 runs:
   using: 'node12'
   main: 'dist/index.js'

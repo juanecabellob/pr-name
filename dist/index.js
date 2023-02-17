@@ -14630,7 +14630,7 @@ async function run() {
 
     if (checkResult) {
       core.info("Check passed");
-      if (action_type === "label" || action_type === "both") {
+      if (actionType === "label" || actionType === "both") {
         await removeLabel(label);
       }
 
@@ -14639,9 +14639,9 @@ async function run() {
 
     if (actionType === "comment") {
       await postComment(comment);
-    } else if (action_type === "label") {
+    } else if (actionType === "label") {
       await addLabel(label);
-    } else if (action_type === "both") {
+    } else if (actionType === "both") {
       await postComment(comment);
       await addLabel(label);
     }
